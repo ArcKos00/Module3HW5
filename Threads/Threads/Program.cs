@@ -1,17 +1,18 @@
 ﻿using System.Text;
-using Threads;
+using Threads.Services;
 
 int countSeconds = 2;
-new FileGenerator().GeneratorFiles();
+new FileService().GeneratorFiles();
 await AsyncReadFiles();
 
+Console.ReadLine();
 Console.WriteLine($"Wait {countSeconds} seconds while the files are deleted");
-await new FileGenerator().DeleterFiles();
+await new FileService().DeleterFiles();
 Thread.Sleep(countSeconds * 1000);
 
 async Task<string> FileHello()
 {
-    using (var sr = new StreamReader(FileGenerator.HelloFile))
+    using (var sr = new StreamReader(FileService.HelloFile))
     {
         return await sr.ReadToEndAsync();
     }
@@ -19,7 +20,7 @@ async Task<string> FileHello()
 
 async Task<string> FileWorld()
 {
-    using (var sr = new StreamReader(FileGenerator.WordFile))
+    using (var sr = new StreamReader(FileService.WordFile))
     {
         return await sr.ReadToEndAsync();
     }
