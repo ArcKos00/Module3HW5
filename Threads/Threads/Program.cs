@@ -33,8 +33,8 @@ async Task AsyncReadFiles()
 
     await Task.Run(() =>
     {
-        list.Add(Task.Run(() => FileHello()));
-        list.Add(Task.Run(() => FileWorld()));
+        list.Add(Task.Run(async () => await FileHello()));
+        list.Add(Task.Run(async () => await FileWorld()));
     });
     Task.WhenAll(list).GetAwaiter().GetResult();
     foreach (var someString in list)
